@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "CommentGetForVCI/1.0.0": {
+        "runtime": {
+          "CommentGetForVCI.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "CommentGetForVCI/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
