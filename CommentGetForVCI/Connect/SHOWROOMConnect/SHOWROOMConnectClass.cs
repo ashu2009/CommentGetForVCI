@@ -45,7 +45,7 @@ namespace CommentGetForVCI
         }
 
         //接続挑戦
-        public async void TryConnect()
+        public async void tryConnect()
         {
             //接続待ち
             conecttingwait = true;
@@ -525,7 +525,7 @@ namespace CommentGetForVCI
         }
 
         //切断挑戦
-        public async void TryDisonnect()
+        public async void tryDisonnect()
         {
             //ニコ生接続中
             if (conecttingLive)
