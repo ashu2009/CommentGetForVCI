@@ -66,7 +66,6 @@ namespace CommentGetForVCI
             clsConnect.TryDisonnect();
         }
 
-
         //一般--------------------------------------------------------------------------------------------
         //VCIフォルダ位置ダイアログ選択
         private void configVCIFilePos3_Click(object sender, EventArgs e)
@@ -645,6 +644,27 @@ namespace CommentGetForVCI
                 clsConfig.changeConfigWrite(choseKindEnum, choseConfigEnum.ToString() + ":", anyConfigData[choseConfigEnum], false);
             }
         }
+
+        //コメント生データ使うかか否か
+        private void configNikoLiveCommentLaw_CheckedChanged(object sender, RoutedEventArgs e)
+        {
+            if (loadEnd)
+            {
+                //設定用データ
+                string[] anyConfigData = clsConfig.CLS_N_LiveConfig.config;
+                //デフォルト値設定用データ
+                string[] anyConfigDefault = clsConfig.CLS_N_LiveConfig.defaultConfig;
+                //設定用データ
+                int choseConfigEnum = (int)NikoLiveConfigClass.ConfigNum.CommentLog;
+                //設定用データ
+                int choseKindEnum = (int)ConfigClass.ConfigKind.N_Live;
+                //チェックあったらば"1"
+                if ((bool)configNikoCommentLaw.IsChecked) anyConfigData[choseConfigEnum] = "1";
+                else anyConfigData[choseConfigEnum] = "0";
+                //configファイルの更新
+                clsConfig.changeConfigWrite(choseKindEnum, choseConfigEnum.ToString() + ":", anyConfigData[choseConfigEnum], false);
+            }
+        }
         //ニコ生--------------------------------------------------------------------------------------------
 
         //SHOWROOM--------------------------------------------------------------------------------------------
@@ -1004,7 +1024,6 @@ namespace CommentGetForVCI
                 clsConfig.changeConfigWrite(choseKindEnum, choseConfigEnum.ToString() + ":", anyConfigData[choseConfigEnum], false);
             }
         }
-
         //SHOWROOM--------------------------------------------------------------------------------------------
     }
 }

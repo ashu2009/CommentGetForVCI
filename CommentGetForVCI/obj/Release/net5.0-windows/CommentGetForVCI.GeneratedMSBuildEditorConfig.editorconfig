@@ -7,4 +7,4 @@ build_property.PublishSingleFile =
 build_property.IncludeAllContentForSelfExtract = 
 build_property._SupportedPlatformList = Android,iOS,Linux,macOS,Windows
 build_property.RootNamespace = CommentGetForVCI
-build_property.ProjectDir = Z:\2021_12～\趣味(git公開用)\CommentGetForVCI\CommentGetForVCI\
+build_property.ProjectDir = Z:\git\CommentGetForVCI\CommentGetForVCI\

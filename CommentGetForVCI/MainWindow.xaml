@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:CommentGetForVCI"
         mc:Ignorable="d"
         Title="CommentGetForVCI" MinWidth="560" MinHeight="300" Height="520" Width="820" Background="#FFE5E5E5" Loaded="コメント取得forVCI_Load" Closed="コメント取得forVCI_Close">
-    <Grid>
+    <Grid Margin="0,0,0,0">
         <Button x:Name="conectBTN" Content="接続" HorizontalAlignment="Left" Margin="395,10,0,0" VerticalAlignment="Top" Height="19" Width="70" Click="conectBTN_Click"/>
         <Button x:Name="disconectBTN" Content="切断" HorizontalAlignment="Left" Margin="470,10,0,0" VerticalAlignment="Top" Height="19" Width="70" Click="disconectBTN_Click"/>
         <TextBox x:Name="programINF_TXTBox" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="380" Height="19"/>
@@ -14,7 +14,7 @@
         <CheckBox x:Name="conectintgCheckBox" Content="番組接続中" HorizontalAlignment="Left" Margin="120,0,0,10" VerticalAlignment="Bottom" Focusable="False" IsHitTestVisible="False" IsTabStop="False" IsEnabled="False"/>
         <CheckBox x:Name="nikoLiveGettingCheckBox" Content="ニコ生コメント取得" HorizontalAlignment="Left" Margin="205,0,0,10" VerticalAlignment="Bottom" Focusable="False" IsHitTestVisible="False" IsTabStop="False" IsEnabled="False"/>
         <CheckBox x:Name="SHOWROOMLiveGettingCheckBox" Content="ショールームコメント取得" HorizontalAlignment="Left" Margin="317,0,0,10" VerticalAlignment="Bottom" IsEnabled="False" Focusable="False" IsHitTestVisible="False" IsTabStop="False"/>
-        <TabControl x:Name="comentTabControl" Margin="10,34,10,30">
+        <TabControl x:Name="comentTabControl" Margin="10,34,10,30" >
             <TabItem Header="ニコ生コメント">
                 <Grid Background="#FFE5E5E5" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto">
 
@@ -117,6 +117,7 @@
                                         <CheckBox x:Name="configNikoLiveCommentFreeGiftSend" Content="無料ギフトコメント送信許可" HorizontalAlignment="Left" Margin="10,217,0,0" VerticalAlignment="Top" Height="19" Checked="configNikoLiveCommentFreeGiftSend_CheckedChanged" Unchecked="configNikoLiveCommentFreeGiftSend_CheckedChanged"/>
                                         <CheckBox x:Name="configNikoLiveCommentGiftSend" Content="有料ギフトコメント送信許可" HorizontalAlignment="Left" Margin="278,217,0,0" VerticalAlignment="Top" Height="19" Checked="configNikoLiveCommentGiftSend_CheckedChanged" Unchecked="configNikoLiveCommentGiftSend_CheckedChanged"/>
                                         <CheckBox x:Name="configNikoCommentLog" Content="ログ用コメント保存許可" HorizontalAlignment="Left" Margin="10,241,0,0" VerticalAlignment="Top" Height="19" Checked="configNikoLiveCommentLog_CheckedChanged" Unchecked="configNikoLiveCommentLog_CheckedChanged"/>
+                                        <CheckBox x:Name="configNikoCommentLaw" Content="コメント生データを使用" HorizontalAlignment="Left" Margin="10,265,0,0" VerticalAlignment="Top" Height="19" Checked="configNikoLiveCommentLaw_CheckedChanged" Unchecked="configNikoLiveCommentLaw_CheckedChanged"/>
                                     </Grid>
                                 </TabItem>
                                 <TabItem Header="SHOWROOM">

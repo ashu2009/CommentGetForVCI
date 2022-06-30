@@ -60,11 +60,11 @@ namespace CommentGetForVCI
                     {
                         case (int)ConfigKind.N_Live:
                             //ニコ生接続挑戦
-                            clsNikoLiveConnect.TryConnect();
+                            clsNikoLiveConnect.tryConnect();
                             break;
                         case (int)ConfigKind.SHOWROOM:
                             //SHOWROOM接続挑戦
-                            clsSHOWROOMConnect.TryConnect();
+                            clsSHOWROOMConnect.tryConnect();
                             break;
                         default:
                             MessageBox.Show("繋ぎ先未確定です");
@@ -90,11 +90,11 @@ namespace CommentGetForVCI
                     {
                         case (int)ConfigKind.N_Live:
                             //ニコ生切断挑戦
-                            clsNikoLiveConnect.TryDisonnect();
+                            clsNikoLiveConnect.tryDisonnect();
                             break;
                         case (int)ConfigKind.SHOWROOM:
                             //SHOWROOM切断挑戦
-                            clsSHOWROOMConnect.TryDisonnect();
+                            clsSHOWROOMConnect.tryDisonnect();
                             break;
                         default:
                             break;

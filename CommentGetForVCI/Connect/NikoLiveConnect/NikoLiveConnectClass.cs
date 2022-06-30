@@ -64,7 +64,7 @@ namespace CommentGetForVCI
         }
 
         //接続挑戦
-        public async void TryConnect()
+        public async void tryConnect()
         {
             //接続待ち
             conecttingwait = true;
@@ -245,7 +245,7 @@ namespace CommentGetForVCI
                 }
                 catch (IOException exe)
                 {
-                   System.Diagnostics.Trace.WriteLine("> " + exe);
+                    System.Diagnostics.Trace.WriteLine("> " + exe);
                 }
 
                 //ファイル初期化/作成
@@ -430,8 +430,10 @@ namespace CommentGetForVCI
                 //UNIX→日付
                 if (Int64.TryParse(timeUNIX, out Int64 local_time)) date = DateTimeOffset.FromUnixTimeSeconds(local_time).ToLocalTime().ToString();
 
+                string correctComment = comment;
+                if ((bool)!MAIN_COMPONENTS.configNikoCommentLaw.IsChecked) correctComment = commentCorrect(comment);
                 //コメント列追加
-                MAIN_COMPONENTS.nikoLiveCommentListView.Items.Add(new string[] { comment_num, fix_handle, userID, date, comment });
+                MAIN_COMPONENTS.nikoLiveCommentListView.Items.Add(new string[] { comment_num, fix_handle, userID, date, correctComment });
 
                 //スクロール機能
                 if ((bool)MAIN_COMPONENTS.configNikoLiveScrollEnable.IsChecked)
@@ -479,6 +481,7 @@ namespace CommentGetForVCI
                     string data = "if vci.assets.IsMine then vci.message.Emit(\"comment\",\"";
                     if ((bool)MAIN_COMPONENTS.configVCICommentSendAddBroadcast.IsChecked) data += "@Ni：";
                     if ((bool)MAIN_COMPONENTS.configVCICommentSendAddFixHandle.IsChecked) data += "@" + name + "：";
+                    if ((bool)!MAIN_COMPONENTS.configNikoCommentLaw.IsChecked) comment = commentCorrect(comment);
                     comment.Replace("\"", "″");
                     data += comment + "\") end";
 
@@ -494,12 +497,125 @@ namespace CommentGetForVCI
                     string data = "if vci.assets.IsMine then vci.message.Emit(\"comment\",\"";
                     if ((bool)MAIN_COMPONENTS.configVCICommentSendAddBroadcast.IsChecked) data += "@Ni：";
                     if ((bool)MAIN_COMPONENTS.configVCICommentSendAddFixHandle.IsChecked) data += "@" + name + "：";
+                    if ((bool)!MAIN_COMPONENTS.configNikoCommentLaw.IsChecked) comment = commentCorrect(comment);
                     data += comment + "\") end";
 
                     //コメント未処理分
                     commentQue.Enqueue(data + "\n");
                 }
             }
+        }
+
+        //コメント内容修正
+        private string commentCorrect(string comment)
+        {
+            string correctComment = comment;
+            int number = 0;
+            if (correctComment.StartsWith("/gift vcast_free_"))
+            {
+                correctComment.Replace("/gift vcast_free_", "");
+
+                number = correctComment.IndexOf(" \\\"");
+                if (number > 0)
+                {
+                    correctComment = correctComment.Substring(number + " \\\"".Length);
+                    number = correctComment.IndexOf("\\\" ");
+                    if (number > 0)
+                    {
+                        string name = correctComment.Substring(0, number);
+                        correctComment = correctComment.Substring(number + "\\\" ".Length);
+                        number = correctComment.IndexOf("\\\"\\\" \\\"");
+                        if (number > 0)
+                        {
+                            correctComment = correctComment.Substring(number + "\\\"\\\" \\\"".Length);
+                            number = correctComment.IndexOf("\\\"");
+                            if (number > 0)
+                            {
+                                string kind = correctComment.Substring(0, number);
+                                return name + "さんから" + kind + "が送られました";
+                            }
+                            else return comment;
+                        }
+                        else return comment;
+                    }
+                    else return comment;
+                }
+                else return comment;
+            }
+            if (correctComment.StartsWith("/gift vcast_"))
+            {
+                correctComment.Replace("/gift vcast_", "");
+
+                number = correctComment.IndexOf(" \\\"");
+                if (number > 0)
+                {
+                    correctComment = correctComment.Substring(number + " \\\"".Length);
+                    number = correctComment.IndexOf("\\\" ");
+                    if (number > 0)
+                    {
+                        string name = correctComment.Substring(0, number);
+                        correctComment = correctComment.Substring(number + "\\\" ".Length);
+                        number = correctComment.IndexOf("\\\"\\\" \\\"");
+                        if (number > 0)
+                        {
+                            correctComment = correctComment.Substring(number + "\\\"\\\" \\\"".Length);
+                            number = correctComment.IndexOf("\\\"");
+                            if (number > 0)
+                            {
+                                string kind = correctComment.Substring(0, number);
+                                return name + "さんから" + kind + "が送られました";
+                            }
+                            else return comment;
+                        }
+                        else return comment;
+                    }
+                    else return comment;
+                }
+                else return comment;
+            }
+            if (correctComment.StartsWith("/nicoad {\\\"version\\\":"))
+            {
+                correctComment.Replace("/nicoad {\\\"version\\\":", "");
+
+                number = correctComment.IndexOf("totalAdPoint\\\":");
+                if (number > 0)
+                {
+                    correctComment = correctComment.Substring(number + "totalAdPoint\\\":".Length);
+                    number = correctComment.IndexOf(",\\\"message\\\":\\\"");
+                    if (number > 0)
+                    {
+                        string point = correctComment.Substring(0, number);
+                        correctComment = correctComment.Substring(number + ",\\\"message\\\":\\\"".Length);
+                        number = correctComment.IndexOf("\\\"");
+                        if (number > 0)
+                        {
+                            string kind = correctComment.Substring(0, number);
+                            return kind + " 合計" + point + "pt";
+                        }
+                        else return comment;
+                    }
+                    else return comment;
+                }
+                else return comment;
+            }
+            for (int count = 0; count < 50; count++)
+            {
+                if (comment.StartsWith("/info " + count.ToString() + " ")) return comment.Replace("/info " + count.ToString() + " ", "");
+            }
+            if (comment.StartsWith("/spi \\\""))
+            {
+                correctComment = correctComment.Replace("/spi \\\"", "");
+
+                number = correctComment.LastIndexOf("\\\"");
+                if (number > 0)
+                {
+                    return correctComment.Substring(0, number);
+                }
+                else return comment;
+            }
+            if (comment.StartsWith("/emotion ")) return comment.Replace("/emotion ", "");
+
+            return comment;
         }
 
         //コメント内容送信可能
@@ -678,7 +794,7 @@ namespace CommentGetForVCI
         }
 
         //切断挑戦
-        public async void TryDisonnect()
+        public async void tryDisonnect()
         {
             //ニコ生接続中
             if (conecttingLive)

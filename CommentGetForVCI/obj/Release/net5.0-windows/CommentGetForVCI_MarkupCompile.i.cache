@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-Z:\2021_12～\趣味(git公開用)\CommentGetForVCI\CommentGetForVCI\obj\Release\net5.0-windows\
+Z:\git\CommentGetForVCI\CommentGetForVCI\obj\Release\net5.0-windows\
 CommentGetForVCI
 none
 false
 TRACE;RELEASE;NET;NET5_0;NETCOREAPP
-Z:\2021_12～\趣味(git公開用)\CommentGetForVCI\CommentGetForVCI\App.xaml
+Z:\git\CommentGetForVCI\CommentGetForVCI\App.xaml
 11407045341
 
 14-881802247
 193-1891726104
 MainWindow.xaml;
 
-True
+False
 

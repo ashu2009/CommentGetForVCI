@@ -21,9 +21,9 @@ namespace CommentGetForVCI
         public enum ConfigNum
         {
             //VCIにコメント送信するか否か
-             VCI_ScriptSend_Comment
+            VCI_ScriptSend_Comment
             //過去コメント何個取得するか
-            ,PreviousCommentMax
+            , PreviousCommentMax
             //番組接続時全てのコメントを送るコメント送るか否か
             , GetAllCommentSendSend
             //新規コメント時スクロール必要か否か
@@ -50,6 +50,8 @@ namespace CommentGetForVCI
             , CommentGiftSend
             //コメントのログとるかか否か
             , CommentLog
+            //コメント生データ使うかか否か
+            , CommentLaw
             //for等のカウント用の終了時使用
             , END
         };
@@ -86,6 +88,8 @@ namespace CommentGetForVCI
             ,"1"
             //コメントのログとるかか否か
             ,"0"
+            //コメント生データ使うかか否か
+            , "0"
         };
 
         //内部config情報反映
@@ -135,6 +139,9 @@ namespace CommentGetForVCI
             //コメントのログとるかか否か
             if (config[(int)ConfigNum.CommentLog] == "0") MAIN_COMPONENTS.configNikoCommentLog.IsChecked = false;
             else MAIN_COMPONENTS.configNikoCommentLog.IsChecked = true;
+            //コメント生データ使うかか否か
+            if (config[(int)ConfigNum.CommentLaw] == "0") MAIN_COMPONENTS.configNikoCommentLaw.IsChecked = false;
+            else MAIN_COMPONENTS.configNikoCommentLaw.IsChecked = true;
         }
 
         //設定のイニシャライズ
